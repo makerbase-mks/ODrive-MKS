@@ -1,0 +1,52 @@
+odrv0.erase_configuration() 						
+
+odrv0.config.brake_resistance = 2.0
+odrv0.config.dc_bus_undervoltage_trip_level = 8.0
+odrv0.config.dc_bus_overvoltage_trip_level = 56.0
+odrv0.config.dc_max_positive_current = 20.0
+odrv0.config.dc_max_negative_current = -3.0
+odrv0.config.max_regen_current = 0
+odrv0.save_configuration()
+
+odrv0.axis0.motor.config.pole_pairs = 7
+odrv0.axis0.motor.config.calibration_current = 5
+odrv0.axis0.motor.config.resistance_calib_max_voltage = 2
+odrv0.axis0.motor.config.motor_type = MOTOR_TYPE_HIGH_CURRENT
+odrv0.axis0.motor.config.current_lim = 15
+odrv0.axis0.motor.config.requested_current_range = 20
+odrv0.save_configuration()
+
+odrv0.axis0.encoder.config.mode = ENCODER_MODE_INCREMENTAL
+odrv0.axis0.encoder.config.cpr = 16384
+odrv0.axis0.encoder.config.bandwidth = 3000
+odrv0.axis0.config.calibration_lockin.current = 5
+odrv0.axis0.config.calibration_lockin.ramp_time = 0.4
+odrv0.axis0.config.calibration_lockin.ramp_distance = 3.1415927410125732
+odrv0.axis0.config.calibration_lockin.accel = 20
+odrv0.axis0.config.calibration_lockin.vel = 40
+odrv0.save_configuration()
+
+odrv0.axis0.controller.config.control_mode = CONTROL_MODE_POSITION_CONTROL
+odrv0.axis0.controller.config.vel_limit = 50
+odrv0.axis0.controller.config.pos_gain = 30
+odrv0.axis0.controller.config.vel_gain = 0.02  				
+odrv0.axis0.controller.config.vel_integrator_gain = 0.2
+odrv0.axis0.controller.config.input_mode = INPUT_MODE_TRAP_TRAJ
+odrv0.axis0.trap_traj.config.vel_limit = 30
+odrv0.axis0.trap_traj.config.accel_limit = 5
+odrv0.axis0.trap_traj.config.decel_limit = 5
+odrv0.save_configuration()
+odrv0.reboot()
+
+odrv0.axis0.requested_state = AXIS_STATE_MOTOR_CALIBRATION  		
+odrv0.axis0.motor.config.pre_calibrated = True				
+odrv0.axis0.requested_state = AXIS_STATE_ENCODER_OFFSET_CALIBRATION 	
+odrv0.axis0.config.startup_encoder_offset_calibration = True   			
+odrv0.axis0.requested_state = AXIS_STATE_CLOSED_LOOP_CONTROL		
+odrv0.axis0.config.startup_closed_loop_control = True			
+odrv0.save_configuration()
+odrv0.reboot()  
+
+odrv0.axis0.controller.input_pos = 50
+odrv0.axis0.controller.input_pos = 0
+odrv0.axis0.requested_state = AXIS_STATE_IDLE
